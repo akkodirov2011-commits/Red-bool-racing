@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"name": "REDBUL",
+		"path": "."
+	},
+	{
+		"name": "img",
+		"path": "../REDBU/img"
+	}
+],
+  "settings": {}
+}
