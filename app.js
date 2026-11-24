@@ -359,12 +359,22 @@ $('#sort').addEventListener('change', e => { sortBy = e.target.value; renderGrid
 
 /* ---------- theme ---------- */
 const root = document.documentElement;
+function applyTheme(theme) {
+  root.dataset.theme = theme;
+  localStorage.setItem('rb_theme', theme);
+  const isDark = theme === 'dark';
+  $('#icoMoon').style.display = isDark ? '' : 'none';
+  $('#icoSun').style.display  = isDark ? 'none' : '';
+  const metaTheme = document.querySelector('meta[name=theme-color]');
+  if (metaTheme) metaTheme.setAttribute('content', isDark ? '#04060E' : '#F4F6FC');
+}
+
+const savedTheme = localStorage.getItem('rb_theme') || 'light';
+applyTheme(savedTheme);
+
 $('#themeBtn').addEventListener('click', () => {
   const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-  root.dataset.theme = next;
-  $('#icoMoon').style.display = next === 'dark' ? '' : 'none';
-  $('#icoSun').style.display  = next === 'dark' ? 'none' : '';
-  document.querySelector('meta[name=theme-color]').setAttribute('content', next === 'dark' ? '#04060E' : '#F4F6FC');
+  applyTheme(next);
 });
 
 /* ---------- newsletter ---------- */
